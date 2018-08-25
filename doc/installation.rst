@@ -10,7 +10,13 @@ From the most simple to the most complex one, you have 3 options:
 
 1 - Using conda (recommended)::
 
- conda install -c damianavila82 rise
+ conda install -c conda-forge rise
+
+.. note::
+
+   Previously, we provided packages in the `damianavila82` channel,
+   going forward please use the `conda-forge` channel because newest versions
+   will not be published in the `damianavila82` channel anymore.
 
 2 - Using pip (less recommended)::
 

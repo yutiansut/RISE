@@ -12,11 +12,11 @@ Instructions and notes for preparing and publishing a release.
 
     npm install
     npm run build
+    npm run build-css
 
 **Step 3.** Check for updated version numbers in
 
 * `package.json`
-* `conda.recipe/meta.yaml`
 
 ### Release
 
@@ -30,52 +30,14 @@ Instructions and notes for preparing and publishing a release.
     python setup.py sdist
     python setup.py bdist_wheel
 
-**Step 6.** Build the conda packages
-
-**For linux and OSX packages**:
-
-    RISE_RELEASE=1 conda build conda.recipe --python=3.6
-    RISE_RELEASE=1 conda build conda.recipe --python=3.5
-    RISE_RELEASE=1 conda build conda.recipe --python=2.7
-
-and:
-
-    conda convert /path/to/conda-bld/linux-64/rise-<version_number>-py36_0.tar.bz2 -p linux-32 -p linux-64 -p osx-64 -o conda_dist
-    conda convert /path/to/conda-bld/linux-64/rise-<version_number>-py35_0.tar.bz2 -p linux-32 -p linux-64 -p osx-64 -o conda_dist
-    conda convert /path/to/conda-bld/linux-64/rise-<version_number>-py27_0.tar.bz2 -p linux-32 -p linux-64 -p osx-64 -o conda_dist
-
-
-**For Windows packages**, you need to build in a Win VM (shared folders will make
-you things easier):
-
-    set RISE_RELEASE=1
-    conda build conda.recipe --python=3.6
-    conda build conda.recipe --python=3.5
-    conda build conda.recipe --python=2.7
-
-If the build hangs, there is probably a permission error, try to run
-again with `--croot %TEMP%`
-
-then, convert them in the same Win VM:
-
-    conda convert C:\path\to\conda-bld\win-64\rise-<version_number>-py36_0.tar.bz2 -p win-64 -p win-32 -o conda_dist
-    conda convert C:\path\to\conda-bld\win-64\rise-<version_number>-py35_0.tar.bz2 -p win-64 -p win-32 -o conda_dist
-    conda convert C:\path\to\conda-bld\win-64\rise-<version_number>-py27_0.tar.bz2 -p win-64 -p win-32 -o conda_dist
-
-**Note:**
-
-* You can increment the build number with the `RISE_BUILD_NUMBER`
-  environment variable.
-
-**Step 7.** Upload *sdist* and *wheels* to PyPI:
+**Step 6.** Upload *sdist* and *wheels* to PyPI:
 
     twine upload dist/*
 
-**Step 8.** Upload conda packages to anaconda.org/damianavila82
-   (5 platforms x 3 pythons):
+**Step 7.** Update the version and the sha256 hash at
+<https://github.com/conda-forge/rise-feedstock/blob/master/recipe/meta.yaml>
+and open a PR with those changes. When the PR is merged, several CI runs will
+be triggered and packages will be generated and uploaded to
+<https://anaconda.org/conda-forge/rise/files>.
 
-    anaconda upload -u damianavila82 conda_dist/linux-32/*
-    anaconda upload -u damianavila82 conda_dist/linux-64/*
-    anaconda upload -u damianavila82 conda_dist/osx-64/*
-    anaconda upload -u damianavila82 conda_dist/win-32/*
-    anaconda upload -u damianavila82 conda_dist/win-64/*
+**NOTE**: Eventually, you would need to rerender the feedstock.

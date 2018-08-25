@@ -28,6 +28,7 @@ Changes
 =======
 
 * 5.4.1
+
   * Support chalkboard functionality (https://github.com/damianavila/RISE/pull/355)
   * Support speaker notes (https://github.com/damianavila/RISE/issues/174)
   * Use a version number that npm can understand (https://github.com/damianavila/RISE/pull/410)
@@ -42,7 +43,9 @@ Changes
   * Add new JS files to the manifest (https://github.com/damianavila/RISE/pull/417)
   * Bump 5.4.0 version (https://github.com/damianavila/RISE/pull/418)
 
-* 5.4.0 packages were removed from PyPI because they were broken.
+* 5.4.0
+
+  * Packages were removed from PyPI and never built on conda-forge because they were broken.
 
 * 5.3.0
 

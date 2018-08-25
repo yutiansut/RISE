@@ -63,9 +63,13 @@ master_doc = 'index'
 # built documents.
 #
 # The short X.Y version.
-version = rise_version_info.base_version
+# HOTFIX
+# version = rise_version_info.base_version
+version = "5.4.1"
 # The full version, including alpha/beta/rc tags.
-release = rise_version
+# HOTFIX
+# release = rise_version
+release = "5.4.1"
 
 # General information about the project.
 project = 'RISE ' + release
